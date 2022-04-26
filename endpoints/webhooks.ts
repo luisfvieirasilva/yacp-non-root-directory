@@ -5,7 +5,7 @@ import { log, LogLevel } from "../utils/log";
 import { Handler, parseGithubHeaders } from "../utils/types";
 
 // Events that need their branches to validated
-const eventsToCheckBranches = new Set(["push"]);
+const eventsToCheckBranches = new Set(['push']);
 
 const getHandler: Handler = async (req) => {
   const events = await GithubEvent.findMany({});
@@ -83,7 +83,8 @@ const postHandler: Handler = async (req) => {
     account = organization.login;
   }
 
-  let projectBranches: string = ["main"].toString();
+  // let projectBranches: string = ["main"].toString();
+  let projectBranches: string = "[main]";
 
   if (!(await isEventBranchValid(eventType, ref, projectBranches))) {
     await log(LogLevel.INFO, `Event ignored!`);
