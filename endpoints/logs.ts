@@ -1,11 +1,11 @@
-import { responseFromJson } from "@chiselstrike/api";
-import { log, LogLevel } from "../utils/log";
+import { responseFromJson } from "@chiselstrike/api"
+import { Logs } from "../models/Logs"
 
 type Handler = (req: Request, res: Response) => Response | Promise<Response>
 
 const handleGet: Handler = async req => {
-  await log(LogLevel.INFO, `Sending hello to ${req.headers["referer"]}`);
-  return responseFromJson({hello: "Hello 2022-04-26 12:04"})
+  const logs = await Logs.findMany({});
+  return responseFromJson(logs)
 }
 
 const handlers: Record<string, Handler> = {
