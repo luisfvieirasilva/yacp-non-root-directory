@@ -1,15 +1,17 @@
 import { responseFromJson } from "@chiselstrike/api";
 import { log, LogLevel } from "../utils/log";
 
+const helloString = "Hello 2022-04-26 14:47";
+
 type Handler = (req: Request, res: Response) => Response | Promise<Response>
 
 const handleGet: Handler = async req => {
-  return responseFromJson({hello: "Hello 2022-04-26 14:41"})
+  return responseFromJson({hello: helloString})
 }
 
 const handlePost: Handler = async req => {
   await log(LogLevel.INFO, `Sending hello to ${req.headers["referer"]}`);
-  return responseFromJson({hello: "Hello 2022-04-26 14:41"})
+  return responseFromJson({hello: helloString})
 }
 
 const handlers: Record<string, Handler> = {
